@@ -63,7 +63,7 @@ type Stone struct {
 
 func NewBoard(dim, percent int) *Board {
 	switch dim {
-	case 9, 13, 19, 21:
+	case 8, 13, 19, 21:
 	default:
 		return nil
 	}
@@ -231,40 +231,42 @@ func (b *Board) Draw(m *image.RGBA) {
 	r := b.image.Bounds()
 	draw.Draw(m, r, b.image, ZP, draw.Src)
 	// Vertical lines.
-	x := b.xInset + b.squareWidth/2
-	y := b.yInset + b.squareHeight/2
+	x := b.xInset
+	y := b.yInset
 	wid := b.lineWidth
-	for i := 0; i < b.dim; i++ {
-		r := image.Rect(x, y, x+wid, y+(b.dim-1)*b.squareHeight)
+	for i := 0; i <= b.dim; i++ {
+		r := image.Rect(x, y, x+wid, y+(b.dim)*b.squareHeight)
 		draw.Draw(m, r, image.Black, ZP, draw.Src)
 		x += b.squareWidth
 	}
 	// Horizontal lines.
-	x = b.xInset + b.squareWidth/2
-	for i := 0; i < b.dim; i++ {
-		r := image.Rect(x, y, x+(b.dim-1)*b.squareWidth+wid, y+wid)
+	x = b.xInset
+	for i := 0; i <= b.dim; i++ {
+		r := image.Rect(x, y, x+(b.dim)*b.squareWidth+wid, y+wid)
 		draw.Draw(m, r, image.Black, ZP, draw.Src)
 		y += b.squareHeight
 	}
 	// Points.
-	spot := 4
-	if b.dim < 13 {
-		spot = 3
-	}
-	points := []IJ{
-		{spot, spot},
-		{spot, (b.dim + 1) / 2},
-		{spot, b.dim + 1 - spot},
-		{(b.dim + 1) / 2, spot},
-		{(b.dim + 1) / 2, (b.dim + 1) / 2},
-		{(b.dim + 1) / 2, b.dim + 1 - spot},
-		{b.dim + 1 - spot, spot},
-		{b.dim + 1 - spot, (b.dim + 1) / 2},
-		{b.dim + 1 - spot, b.dim + 1 - spot},
-	}
-	for _, ij := range points {
-		b.drawPoint(m, ij)
-	}
+	/*
+		spot := 4
+		if b.dim < 13 {
+			spot = 3
+		}
+		points := []IJ{
+			{spot, spot},
+			{spot, (b.dim + 1) / 2},
+			{spot, b.dim + 1 - spot},
+			{(b.dim + 1) / 2, spot},
+			{(b.dim + 1) / 2, (b.dim + 1) / 2},
+			{(b.dim + 1) / 2, b.dim + 1 - spot},
+			{b.dim + 1 - spot, spot},
+			{b.dim + 1 - spot, (b.dim + 1) / 2},
+			{b.dim + 1 - spot, b.dim + 1 - spot},
+		}
+		for _, ij := range points {
+			b.drawPoint(m, ij)
+		}
+	*/
 	// Pieces.
 	for i := 1; i <= b.dim; i++ {
 		for j := 1; j <= b.dim; j++ {

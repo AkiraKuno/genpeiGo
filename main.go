@@ -36,10 +36,9 @@ func main() {
 	flag.Parse()
 
 	rand.Seed(int64(time.Now().Nanosecond()))
-	board := NewBoard(9, *scale)
+	board := NewBoard(8, *scale)
 
 	driver.Main(func(s screen.Screen) {
-		// 初期化してるっぽい
 		w, err := s.NewWindow(nil)
 		if err != nil {
 			log.Fatal(err)
@@ -53,7 +52,6 @@ func main() {
 			}
 		}()
 
-		// アイドリング
 		for {
 			switch e := w.NextEvent().(type) {
 			case lifecycle.Event:
@@ -79,7 +77,6 @@ func main() {
 				} else if e.Modifiers&key.ModMeta != 0 {
 					e.Button = mouse.ButtonMiddle
 				}
-				// 石を置いてるっぽい(次のケースに渡す)
 				if board.click(b.RGBA(), int(e.X), int(e.Y), int(e.Button)) {
 					w.Send(paint.Event{})
 				}

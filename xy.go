@@ -125,9 +125,7 @@ func (ij IJ) XYCenter(d *Dims) XY {
 // on the board image.
 func (ij IJ) XYStone(d *Dims) image.Rectangle {
 	center := ij.XYCenter(d)
-	// min := image.Point{center.x - d.stoneDiam/2, center.y - d.stoneDiam/2}
-	min := image.Point{center.x - d.stoneDiam, center.y - d.stoneDiam}
-	// max := image.Point{center.x + d.stoneDiam/2, center.y + d.stoneDiam/2}
-	max := image.Point{center.x + d.stoneDiam, center.y + d.stoneDiam}
+	min := image.Point{center.x - d.stoneDiam/2, center.y - d.stoneDiam/2}
+	max := image.Point{center.x + d.stoneDiam/2, center.y + d.stoneDiam/2}
 	return image.Rectangle{Min: min, Max: max}
 }
