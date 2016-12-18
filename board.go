@@ -63,11 +63,11 @@ type Stone struct {
 
 func NewBoard(dim, percent int) *Board {
 	switch dim {
-	case 8, 13, 19, 21:
+	case 8, 9, 13, 19, 21:
 	default:
 		return nil
 	}
-	boardTexture := get("goboard.jpg", 0)
+	boardTexture := get("genpeiGoboard.jpg", 0)
 	b := new(Board)
 	b.Dims.Init(dim, 100)
 	b.pieces = make([]*Piece, maxBoard*maxBoard)
@@ -85,14 +85,14 @@ func NewBoard(dim, percent int) *Board {
 	circleMask := makeCircle()
 	// Blackstones go first
 	for _, name := range names {
-		if strings.HasPrefix(name, "blackstone") {
+		if strings.HasPrefix(name, "blackgopher") {
 			s, m := makeStone(name, circleMask)
 			b.stone = append(b.stone, Stone{s, m, nil, nil})
 			b.numBlackStones++
 		}
 	}
 	for _, name := range names {
-		if strings.HasPrefix(name, "whitestone") {
+		if strings.HasPrefix(name, "whitegopher") {
 			s, m := makeStone(name, circleMask)
 			b.stone = append(b.stone, Stone{s, m, nil, nil})
 			b.numWhiteStones++
