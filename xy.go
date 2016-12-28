@@ -112,6 +112,15 @@ func (ij IJ) XY(d *Dims) XY {
 	return XY{d.xInset + ij.i*d.squareWidth, d.yInset + ij.j*d.squareHeight}
 }
 
+// IJtoXYConer converts a Go position to the coner of the square for that position
+// on the board image.
+func (ij IJ) XYConer(d *Dims) XY {
+	xy := ij.XY(d)
+	xy.x += d.squareWidth
+	xy.y += d.squareHeight
+	return xy
+}
+
 // IJtoXYCenter converts a Go position to the center of the square for that position
 // on the board image.
 func (ij IJ) XYCenter(d *Dims) XY {

@@ -247,26 +247,19 @@ func (b *Board) Draw(m *image.RGBA) {
 		y += b.squareHeight
 	}
 	// Points.
-	/*
-		spot := 4
-		if b.dim < 13 {
-			spot = 3
-		}
-		points := []IJ{
-			{spot, spot},
-			{spot, (b.dim + 1) / 2},
-			{spot, b.dim + 1 - spot},
-			{(b.dim + 1) / 2, spot},
-			{(b.dim + 1) / 2, (b.dim + 1) / 2},
-			{(b.dim + 1) / 2, b.dim + 1 - spot},
-			{b.dim + 1 - spot, spot},
-			{b.dim + 1 - spot, (b.dim + 1) / 2},
-			{b.dim + 1 - spot, b.dim + 1 - spot},
-		}
-		for _, ij := range points {
-			b.drawPoint(m, ij)
-		}
-	*/
+	spot := 4
+	if b.dim < 13 {
+		spot = 2
+	}
+	points := []IJ{
+		{spot, b.dim + 1 - spot},
+		{spot, spot + 1},
+		{b.dim - spot, spot + 1},
+		{b.dim - spot, b.dim + 1 - spot},
+	}
+	for _, ij := range points {
+		b.drawPoint(m, ij)
+	}
 	// Pieces.
 	for i := 1; i <= b.dim; i++ {
 		for j := 1; j <= b.dim; j++ {
@@ -279,7 +272,7 @@ func (b *Board) Draw(m *image.RGBA) {
 }
 
 func (b *Board) drawPoint(m *image.RGBA, ij IJ) {
-	pt := ij.XYCenter(&b.Dims)
+	pt := ij.XYConer(&b.Dims)
 	wid := b.lineWidth
 	sz := wid * 3 / 2
 	r := image.Rect(pt.x-sz, pt.y-sz, pt.x+wid+sz, pt.y+wid+sz)
@@ -297,8 +290,6 @@ func (b *Board) click(m *image.RGBA, x, y, button int) bool {
 	if !ok {
 		return false
 	}
-	// debug
-	println(ij.i, ij.j)
 	switch button {
 	default:
 		return false
