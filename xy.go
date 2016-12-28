@@ -35,10 +35,10 @@ const (
 	xInset0    = 100 // Distance from the edge of the board image to the left side of the first stone.
 	yInset0    = 115 // Distance from the top of the board image to the top side of the first stone.
 	stoneSize0 = 256 // Size of a stone on the board.
-	stoneDiam0 = 225 // Diameter of the circular part of the stone within the square.
+	stoneDiam0 = 240 // Diameter of the circular part of the stone within the square.
 	// The square is a little smaller than the stone, for crowding.
 	squareWidth0  = 215 // Width of a square on the board.
-	squareHeight0 = 218 // Height of a square on the board.
+	squareHeight0 = 215 // Height of a square on the board.
 	stoneRad2     = stoneDiam0 * stoneDiam0 / 4
 )
 
